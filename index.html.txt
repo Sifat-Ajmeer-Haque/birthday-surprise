@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sagor 🎉</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Start Screen */
+#start-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Main Content */
+#main-content {
+    display: none;
+}
+
+img {
+    max-width: 85%;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* Button */
+#surprise-btn {
+    display: none;
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff0000, #ff9900);
+    color: white;
+    cursor: pointer;
+}
+
+/* Video */
+#video-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Start Screen -->
+
+<div id="start-screen">
+    <h1>🎉 Happy Birthday 🎉</h1>
+    <h2>Md Imtiage Ahmed Sagor</h2>
+    <p>Click anywhere to start the surprise...</p>
+</div>
+
+<!-- Photo Section -->
+
+<div id="main-content">
+    <img src="car-photo.jpg" alt="Birthday Photo">
+    <br>
+    <button id="surprise-btn">🎁 Click for Surprise</button>
+</div>
+
+<!-- Video Section -->
+
+<div id="video-container">
+    <video id="birthday-video" controls>
+        <source src="your-video-file.mp4" type="video/mp4">
+    </video>
+</div>
+
+<!-- Music -->
+
+<audio id="bg-music">
+    <source src="your-music-file.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const startScreen = document.getElementById("start-screen");
+const mainContent = document.getElementById("main-content");
+const button = document.getElementById("surprise-btn");
+const videoContainer = document.getElementById("video-container");
+const video = document.getElementById("birthday-video");
+const music = document.getElementById("bg-music");
+
+/* Start everything on first click */
+document.body.addEventListener("click", () => {
+    startScreen.style.display = "none";
+    mainContent.style.display = "block";
+    music.play();
+}, { once: true });
+
+/* Show button after music ends */
+music.addEventListener("ended", () => {
+    button.style.display = "inline-block";
+});
+
+/* Play video on button click */
+button.addEventListener("click", () => {
+    videoContainer.style.display = "block";
+    video.play();
+});
+</script>
+
+</body>
+</html>
