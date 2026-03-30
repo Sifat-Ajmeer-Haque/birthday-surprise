@@ -1,130 +1,157 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Sagor 🎉</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sagor!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    background: black;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
+        /* 1. Logo Section */
+        #logo-screen {
+            text-align: center;
+            animation: fadeOut 2s forwards 3s;
+        }
 
-/* Start Screen */
-#start-screen {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+        .logo {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #ff4500;
+            text-shadow: 0 0 20px #ffea00, 2px 2px 5px #000;
+            letter-spacing: 5px;
+        }
 
-/* Main Content */
-#main-content {
-    display: none;
-}
+        /* 2. Main Content (Car & Celebrities) */
+        #main-content {
+            opacity: 0;
+            display: none;
+            text-align: center;
+            animation: fadeIn 3s forwards;
+        }
 
-img {
-    max-width: 85%;
-    border-radius: 15px;
-    margin-top: 20px;
-}
+        .celebrity-photo {
+            max-width: 80%;
+            border: 5px solid #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+        }
 
-/* Button */
-#surprise-btn {
-    display: none;
-    margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 20px;
-    border: none;
-    border-radius: 30px;
-    background: linear-gradient(45deg, #ff0000, #ff9900);
-    color: white;
-    cursor: pointer;
-}
+        /* 3. Surprise Button */
+        #surprise-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, #ff0000, #ff8c00);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+            transition: transform 0.3s;
+            display: none;
+        }
 
-/* Video */
-#video-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-}
+        #surprise-btn:hover {
+            transform: scale(1.1);
+        }
 
-video {
-    width: 100%;
-    height: 100%;
-}
-</style>
+        /* 4. Video Player */
+        #video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 100;
+        }
 
+        video {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Animations */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- Start Screen -->
+    <div id="logo-screen">
+        <h1 class="logo">AAGUN-ER TUFAN</h1>
+        <p>A Sagor Ahmed Production</p>
+    </div>
 
-<div id="start-screen">
-    <h1>🎉 Happy Birthday 🎉</h1>
-    <h2>Md Imtiage Ahmed Sagor</h2>
-    <p>Click anywhere to start the surprise...</p>
-</div>
+    <div id="main-content">
+        <img src="your-celebrity-car-photo.jpg" alt="Sagor with World Leaders" class="celebrity-photo">
+        <br>
+        <button id="surprise-btn">CLICK FOR A SURPRISE! 🎁</button>
+    </div>
 
-<!-- Photo Section -->
+    <div id="video-container">
+        <video id="birthday-video" controls>
+            <source src="your-video-file.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
-<div id="main-content">
-    <img src="car-photo.jpg" alt="Birthday Photo">
-    <br>
-    <button id="surprise-btn">🎁 Click for Surprise</button>
-</div>
+    <audio id="bg-music" loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- Video Section -->
+    <script>
+        const logoScreen = document.getElementById('logo-screen');
+        const mainContent = document.getElementById('main-content');
+        const surpriseBtn = document.getElementById('surprise-btn');
+        const videoContainer = document.getElementById('video-container');
+        const video = document.getElementById('birthday-video');
+        const music = document.getElementById('bg-music');
 
-<div id="video-container">
-    <video id="birthday-video" controls>
-        <source src="your-video-file.mp4" type="video/mp4">
-    </video>
-</div>
+        // Start the sequence
+        window.addEventListener('load', () => {
+            // Auto-play music (Browser might block this, so we trigger it on first click)
+            document.body.addEventListener('click', () => {
+                music.play();
+            }, { once: true });
 
-<!-- Music -->
+            // Transition from Logo to Main Content after 4 seconds
+            setTimeout(() => {
+                logoScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                
+                // Show surprise button after another 3 seconds
+                setTimeout(() => {
+                    surpriseBtn.style.display = 'inline-block';
+                }, 3000);
+            }, 5000);
+        });
 
-<audio id="bg-music">
-    <source src="your-music-file.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-const startScreen = document.getElementById("start-screen");
-const mainContent = document.getElementById("main-content");
-const button = document.getElementById("surprise-btn");
-const videoContainer = document.getElementById("video-container");
-const video = document.getElementById("birthday-video");
-const music = document.getElementById("bg-music");
-
-/* Start everything on first click */
-document.body.addEventListener("click", () => {
-    startScreen.style.display = "none";
-    mainContent.style.display = "block";
-    music.play();
-}, { once: true });
-
-/* Show button after music ends */
-music.addEventListener("ended", () => {
-    button.style.display = "inline-block";
-});
-
-/* Play video on button click */
-button.addEventListener("click", () => {
-    videoContainer.style.display = "block";
-    video.play();
-});
-</script>
-
+        // Surprise Button Action
+        surpriseBtn.addEventListener('click', () => {
+            music.pause(); // Stop the funk track
+            videoContainer.style.display = 'block';
+            video.play();
+        });
+    </script>
 </body>
 </html>
